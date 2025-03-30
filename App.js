@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './src/components/Header';
 import NuevoPresupuesto from './src/components/NuevoPresupuesto';
 import ControlPresupuesto from './src/components/ControlPresupuesto';
+import FormularioGasto from './src/components/FormularioGasto';
 
 import {
   ScrollView,
@@ -12,7 +13,8 @@ import {
   Pressable,
   Image,
   Modal,
-  SafeAreaView
+  SafeAreaView,
+  Text
 } from 'react-native';
 
 
@@ -30,6 +32,8 @@ const App = () => {
     {id:3,cantidad:50}*/
   ])
 
+  //V-126,paso 2.21
+  const [ modal, setModal] = useState(false)
 
   //V-119,paso 1.18
   const handleNuevoPresupuesto = (presupuesto) => {
@@ -69,7 +73,6 @@ const App = () => {
               presupuesto={presupuesto} 
 //                 //Vid 164
 //                 resetearApp={resetearApp}
-            
             />
           ) :(
             //V-117,paso 1.4  
@@ -80,9 +83,47 @@ const App = () => {
               //Paso 1.19
               handleNuevoPresupuesto={handleNuevoPresupuesto}
            />
-     
           )}
+           
       </View>
+      {/**Paso 2.23 */}
+
+        {modal && (
+        <Modal
+            //Paso 2.24
+            animationType='slide'
+            visible={modal} 
+        > 
+        {/**Paso 2.26 */}
+        <FormularioGasto
+            // setModal={setModal}
+            // handleGasto={handleGasto}
+            // //Vid 142
+            // gasto={gasto}
+            // //Vid 141
+            // setGasto={setGasto}
+            // //Vid 145
+            // eliminarGasto={eliminarGasto}
+        
+        />    
+        </Modal>
+      )}
+
+      {/**V-125,paso 2.19 */}
+      {isValidPresupuesto && (
+        <Pressable
+          
+          style={styles.pressable}
+          //Paso 2.22
+          onPress={() => setModal(!modal)}
+        >
+          <Image
+              style={styles.imagen}
+              source={require('./src/img/nuevo-gasto.png')}
+          />
+        </Pressable>
+      )}
+     
    
     </View>
   );
@@ -99,6 +140,14 @@ const styles = StyleSheet.create({
       backgroundColor: '#3B82F6',
       //minHeight: 400
   },
+  //Paso 2.20
+  imagen: {
+    width: 60,
+    height: 60,
+    position:'absolute',
+    top:120,
+    right:20
+  }
 
  
 });
@@ -108,9 +157,6 @@ export default App;
 
 
 // import AsyncStorage from '@react-native-async-storage/async-storage'
-
-
-// import FormularioGasto from './src/components/FormularioGasto';
 // //Vid 133
 // import ListadoGastos from './src/components/ListadoGastos';
 // //Vid 151
@@ -119,10 +165,6 @@ export default App;
 // import { generarId } from './src/helpers'
 
 // const App = () => {
-
-
-
-//   const [ modal, setModal] = useState(false)
 //   //Vid 141
 //   const [ gasto, setGasto ] = useState({})
 //   //Vid 152
@@ -322,36 +364,9 @@ export default App;
 
 //       </ScrollView>
 
-//       {modal && (
-//         <Modal
-//             animationType='slide'
-//             visible={modal} 
-//         > 
-//         <FormularioGasto
-//             setModal={setModal}
-//             handleGasto={handleGasto}
-//             //Vid 142
-//             gasto={gasto}
-//             //Vid 141
-//             setGasto={setGasto}
-//             //Vid 145
-//             eliminarGasto={eliminarGasto}
-        
-//         />    
-//         </Modal>
-//       )}
 
-//       {isValidPresupuesto && (
-//         <Pressable
-//           //Vid 146
-//           style={styles.pressable}
-//           onPress={() => setModal(!modal)}>
-//           <Image
-//               style={styles.imagen}
-//               source={require('./src/img/nuevo-gasto.png')}
-//           />
-//         </Pressable>
-//       )}
+
+
       
 //     </View>
 //   );
