@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './src/components/Header';
 import NuevoPresupuesto from './src/components/NuevoPresupuesto';
+import ControlPresupuesto from './src/components/ControlPresupuesto';
 
 import {
   ScrollView,
@@ -16,22 +17,32 @@ import {
 
 
 const App = () => {
-  //V-120
-  //const [ isValidPresupuesto, setIsValidPresupuesto ] = useState(false)
+  //V-120,paso 1.26
+  const [ isValidPresupuesto, setIsValidPresupuesto ] = useState(false)
+  //paso 1.21
+  const [ presupuesto, setPresupuesto ] = useState(0)
+
+  //V-124
+  const [ gastos, setGastos ] = useState([
+
+    /*{id:1,cantidad:30},
+    {id:2,cantidad:730},
+    {id:4,cantidad:930}*/
+  ])
 
 
   //V-119,paso 1.18
   const handleNuevoPresupuesto = (presupuesto) => {
     //console.log('desde app',presupuesto)
     if(Number(presupuesto) > 0) {
-    //V-120
-    //setIsValidPresupuesto(true)
+    //paso 1.27
+    setIsValidPresupuesto(true)
       //paso 1.22
       console.log('presupuesto valido')
     } else {
       //Esto funcion para iOs solamente
       //Alert.alert('Error', 'El Presupuesto no puede ser 0 o menor', 'Ok')
-      //Paso 1.23, le ponemos una alerta
+      //Paso 1.24, le ponemos una alerta
       Alert.alert('Error','El Presupuesto no puede ser 0 o menor')
       console.log('presupuesto no valido')
       Alert.alert
@@ -48,13 +59,29 @@ const App = () => {
       <View style={styles.header}>
           {/*Paso 1.1, importamos Header */}
           <Header/>
-          {/*V-117,paso 1.4 */}   
-          <NuevoPresupuesto
-            //Paso 1.19
-            handleNuevoPresupuesto={handleNuevoPresupuesto}
-          
-          />
 
+          {/**Paso 1.29 */}
+          {isValidPresupuesto ? (
+            <ControlPresupuesto
+              
+              //gastos={gastos}
+              //Paso2.8
+              presupuesto={presupuesto} 
+//                 //Vid 164
+//                 resetearApp={resetearApp}
+            
+            />
+          ) :(
+            //V-117,paso 1.4  
+            <NuevoPresupuesto
+              //V-122.paso 2.6
+              presupuesto={presupuesto}
+              setPresupuesto={setPresupuesto}
+              //Paso 1.19
+              handleNuevoPresupuesto={handleNuevoPresupuesto}
+           />
+     
+          )}
       </View>
    
     </View>
@@ -82,8 +109,7 @@ export default App;
 
 // import AsyncStorage from '@react-native-async-storage/async-storage'
 
-// //Vid 120
-// import ControlPresupuesto from './src/components/ControlPresupuesto';
+
 // import FormularioGasto from './src/components/FormularioGasto';
 // //Vid 133
 // import ListadoGastos from './src/components/ListadoGastos';
@@ -94,17 +120,8 @@ export default App;
 
 // const App = () => {
 
-//   //Vid 120
-//   const [ isValidPresupuesto, setIsValidPresupuesto ] = useState(false)
-//   //Vid 122
-//   const [ presupuesto, setPresupuesto ] = useState(0)
-//   //Vid 124
-//   const [ gastos, setGastos ] = useState([
 
-//     /*{id:1,cantidad:30},
-//     {id:2,cantidad:730},
-//     {id:4,cantidad:930}*/
-//   ])
+
 //   const [ modal, setModal] = useState(false)
 //   //Vid 141
 //   const [ gasto, setGasto ] = useState({})
@@ -268,15 +285,11 @@ export default App;
 
 //               {isValidPresupuesto ? (
 //                 <ControlPresupuesto
-//                 gastos={gastos}
-//                 presupuesto={presupuesto} 
-//                 //Vid 164
-//                 resetearApp={resetearApp}
+
 //                 />
 //               ) : (
 //                   <NuevoPresupuesto
-//                   presupuesto={presupuesto}
-//                   setPresupuesto={setPresupuesto}
+
 //                   handleNuevoPresupuesto={handleNuevoPresupuesto}
               
 //               />

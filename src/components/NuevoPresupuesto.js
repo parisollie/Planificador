@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native'
+import globalStyles from '../styles'
 
 
 //V-117,Paso 1.3, creamos el componente
 const NuevoPresupuesto = (
     { 
+        //Paso 2.7
+        presupuesto, 
+        setPresupuesto, 
         //Paso 1.23
-       // presupuesto, 
-       // setPresupuesto, 
         handleNuevoPresupuesto 
     }
 ) => {
-    //paso 1.21
-    const [ presupuesto, setPresupuesto ] = useState(0)
+  
     
     return (
         //Paso 1.9, le pones los estilos del contenedor
@@ -25,7 +26,7 @@ const NuevoPresupuesto = (
                 keyboardType='numeric'
                 placeholder='Agrega tu presupuesto: Ej. 300'
                 style={styles.input}
-                //Paso 1.24
+                //Paso 1.25
                 value={ presupuesto.toString() }
                 onChangeText={setPresupuesto}
                 
@@ -48,24 +49,8 @@ const NuevoPresupuesto = (
 
 //paso 1.6
 const styles = StyleSheet.create({
-    //Paso 1.8
     contenedor: {
-        backgroundColor: '#FFF',
-        marginHorizontal: 10,
-        borderRadius: 10,
-        paddingVertical: 40,
-        paddingHorizontal: 20,
-        //Paso 1.13, para ponere encimado
-        transform: [{ translateY: 50 }],
-        //Paso 1.14, le ponemos sombras
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        elevation: 5,
+        ...globalStyles.contenedor, 
     },
     //Paso 1.17
     label: {
@@ -97,11 +82,6 @@ const styles = StyleSheet.create({
 
 export default NuevoPresupuesto
 
-
-
-// import React from 'react'
-// import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native'
-// import globalStyles from '../styles'
 
 // //Vid 117 
 // const NuevoPresupuesto = ({ 
