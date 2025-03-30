@@ -6,8 +6,7 @@ import globalStyles from '../styles'
 const FormularioGasto = ({
     //Paso 2.36
     setModal,
-    //     //Vid 131
-    //     handleGasto, 
+    handleGasto,
     //     //Vid 142
     //     gasto, 
     //     setGasto, 
@@ -15,6 +14,27 @@ const FormularioGasto = ({
     //     eliminarGasto
 
 }) => {
+    //V-130,Paso 3.0
+    const [nombre, setNombre] = useState('')
+    const [cantidad, setCantidad] = useState('')
+    const [categoria, setCategoria] = useState('')
+    //     const [ id, setId ] = useState('')
+    //     const [ fecha, setFecha ] = useState('')
+
+    //     //Vid 142
+    //     useEffect(() => {
+    //         //? , existe la propiedad
+    //         if(gasto?.nombre) {
+    //             console.log('Si hay algo')
+    //             setNombre(gasto.nombre)
+    //             setCantidad(gasto.cantidad)
+    //             setCategoria(gasto.categoria)
+    //             setId(gasto.id)
+    //             setFecha(gasto.fecha)
+    //         }
+    //     }, [gasto])
+
+
     return (
         //v-127,Paso 2.26
         <SafeAreaView style={styles.contenedor}>
@@ -24,7 +44,7 @@ const FormularioGasto = ({
                     onLongPress={() => {
                         //Paso 2.37
                         setModal(false)
-                        //     //Vid 141
+                        //     //V-141
                         //     setGasto({})
                     }}
                     //V-129,paso 2.34
@@ -59,9 +79,9 @@ const FormularioGasto = ({
                     <TextInput
                         style={styles.input}
                         placeholder='Nombre del gasto. ej. Comida'
-                    //Vid 130
-                    //onChangeText={setNombre}
-                    //value={nombre}
+                        //paso 3.1
+                        onChangeText={setNombre}
+                        value={nombre}
                     />
                 </View>
 
@@ -73,19 +93,20 @@ const FormularioGasto = ({
                         style={styles.input}
                         placeholder='Cantidad del gasto. ej. 300'
                         keyboardType='numeric'
-                    //Vid 130
-                    // onChangeText={setCantidad}
-                    // value={cantidad}
+                        //Paso 3.2
+                        onChangeText={setCantidad}
+                        value={cantidad}
                     />
                 </View>
 
                 <View style={styles.campo}>
                     <Text style={styles.label}>Categoría Gasto</Text>
                     <Picker
-                    // selectedValue={categoria}
-                    // onValueChange={(valor) => {
-                    //     setCategoria(valor)
-                    // }}
+                        //paso 3.3
+                        selectedValue={categoria}
+                        onValueChange={(valor) => {
+                            setCategoria(valor)
+                        }}
 
                     >
                         {/**Paso 2.31,ponemos los datos del picker */}
@@ -102,7 +123,8 @@ const FormularioGasto = ({
 
                 <Pressable
                     style={styles.submitBtn}
-                // //Vid 131 y 143
+                    //Paso 3.6 y 143
+                    onPress={() => handleGasto({ nombre, cantidad, categoria })}
                 // onPress={() => handleGasto({ nombre, cantidad, categoria, id, fecha })}
 
                 >
@@ -196,33 +218,9 @@ export default FormularioGasto
 
 
 
-// //<Text style={styles.colorLetra} >FormularioGasto</Text>
-// const FormularioGasto = ({
-
-// }) => {
-//     const [ nombre, setNombre] = useState('')
-//     const [ cantidad, setCantidad] = useState('')
-//     const [ categoria, setCategoria] = useState('')
-//     const [ id, setId ] = useState('')
-//     const [ fecha, setFecha ] = useState('')
-
-//     //Vid 142
-//     useEffect(() => {
-//         //? , existe la propiedad
-//         if(gasto?.nombre) {
-//             console.log('Si hay algo')
-//             setNombre(gasto.nombre)
-//             setCantidad(gasto.cantidad)
-//             setCategoria(gasto.categoria)
-//             setId(gasto.id)
-//             setFecha(gasto.fecha)
-//         }
-//     }, [gasto])
 
 
 
-// }
 
 
 
-// export default FormularioGasto

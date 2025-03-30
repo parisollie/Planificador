@@ -4,7 +4,10 @@ import Header from './src/components/Header';
 import NuevoPresupuesto from './src/components/NuevoPresupuesto';
 import ControlPresupuesto from './src/components/ControlPresupuesto';
 import FormularioGasto from './src/components/FormularioGasto';
-
+import { generarId } from './src/helpers'
+import ListadoGastos from './src/components/ListadoGastos';
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// import Filtro from './src/components/Filtro';
 import {
   ScrollView,
   StyleSheet,
@@ -53,20 +56,79 @@ const App = () => {
 
     }
   }
+  //V-131,Paso 3.4
+  const handleGasto = gasto => {
+    console.log(gasto)
+    //Paso 3.7
+    if(Object.values(gasto).includes('')){
+        Alert.alert(
+        "Error",
+        "Todos los campos son obligatorios",
+      )
+      return 
+    }
 
+    //paso 3.9,Añadir el nuevo gasto al state
+    gasto.id = generarId()
+    //gasto.fecha = Date.now()
+    setGastos([...gastos, gasto])
+    //Paos 3.10
+    setModal(!modal)
+    
+
+    // if([gasto.nombre,gasto.categoria,gasto.cantidad].includes('')) {
+   
+    //   
+    // }
+     
+    //  //Vid 143
+    // if(gasto.id) {
+    //   //Creamos una variable temporal gastoState => gastoState.id
+    //   const gastosActualizados = gastos.map( gastoState => gastoState.id === gasto.id ? gasto : gastoState )
+    //   setGastos(gastosActualizados)
+    // } else {
+  
+    // }
+   
+  }
+
+
+  
+  // //Vid 145
+  // const eliminarGasto = id => {
+  //   Alert.alert(
+  //     '¿Deseas eliminar este gasto?',
+  //     'Un gasto eliminado no se puede recuperar', 
+  //     [
+  //       { text: 'No', style: 'cancel'},
+  //       { text: 'Si, Eliminar', onPress: () => {
+          
+  //         const gastosActualizados = gastos.filter( gastoState => gastoState.id !== id  )
+
+  //         setGastos(gastosActualizados)
+  //         setModal(!modal)
+  //         setGasto({})
+  //       }}
+  //     ]
+  //   )
+  // }
 
 
   return (
     //Paso 1.12
     <View style={styles.contenedor} >
-      {/*Paso 1.10 */}
+      {/**Paso 3.20, ponemos el scroll */}
+      <ScrollView>
+        {/*Paso 1.10 */}
       <View style={styles.header}>
           {/*Paso 1.1, importamos Header */}
           <Header/>
 
           {/**Paso 1.29 */}
           {isValidPresupuesto ? (
-            <ControlPresupuesto
+            
+           
+              <ControlPresupuesto
               //Paso 2.15
               gastos={gastos}
               //Paso2.8
@@ -74,6 +136,8 @@ const App = () => {
 //                 //Vid 164
 //                 resetearApp={resetearApp}
             />
+                   
+          
           ) :(
             //V-117,paso 1.4  
             <NuevoPresupuesto
@@ -83,11 +147,44 @@ const App = () => {
               //Paso 1.19
               handleNuevoPresupuesto={handleNuevoPresupuesto}
            />
+  
           )}
-           
       </View>
-      {/**Paso 2.23 */}
+      {/**V-133,Paso 3.10 */}
 
+      {isValidPresupuesto && (
+      
+       
+            // <>
+            //   <Filtro
+            //     //Vid 152 
+            //     filtro={filtro}
+            //     setFiltro={setFiltro}
+            //     //Vid 152
+            //     gastos={gastos}
+            //     setGastosFiltrados={setGastosFiltrados}
+            //   />
+              //Paso 3.12
+              <ListadoGastos 
+            
+                //Vid 141
+                //setModal={setModal}
+                //Vid 141
+                //setGasto={setGasto}
+                //filtro={filtro}
+                //Paso
+                //gastosFiltrados={gastosFiltrados}
+                //paso 3.14
+                gastos = {gastos}
+
+              />
+
+            // </>
+          )}
+
+      </ScrollView>
+      
+      {/**Paso 2.23 */}
         {modal && (
         <Modal
             //Paso 2.24
@@ -98,7 +195,8 @@ const App = () => {
         <FormularioGasto
           //Paso 2.35
           setModal={setModal}
-            // handleGasto={handleGasto}
+            //Paso 3.5
+            handleGasto={handleGasto}
             // //Vid 142
             // gasto={gasto}
             // //Vid 141
@@ -146,8 +244,8 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     position:'absolute',
-    top:70,
-    right:20
+    bottom:40,
+    right:30
   }
 
  
@@ -157,13 +255,8 @@ const styles = StyleSheet.create({
 export default App;
 
 
-// import AsyncStorage from '@react-native-async-storage/async-storage'
-// //Vid 133
-// import ListadoGastos from './src/components/ListadoGastos';
-// //Vid 151
-// import Filtro from './src/components/Filtro';
-// //Vid 132
-// import { generarId } from './src/helpers'
+
+
 
 // const App = () => {
 //   //Vid 141
@@ -234,65 +327,9 @@ export default App;
 //   }, [gastos])
 
 //   /***************************************************************************************** */
-// //Vid 119
-//   const handleNuevoPresupuesto = (presupuesto) => {
-//     if(Number(presupuesto) > 0) {
-//       //Vid 120
-//       setIsValidPresupuesto(true)
-//       console.log('presupuesto valido')
-//     } else {
-//       //Esto funcion para iOs solamente
-//       //Alert.alert('Error', 'El Presupuesto no puede ser 0 o menor', 'Ok')
-//       Alert.alert('Error','El Presupuesto no puede ser 0 o menor')
-//       console.log('presupuesto no valido')
-//       Alert.alert
 
-//     }
-//   }
 
-//   const handleGasto = gasto => {
-//     //Vid 131
-//     console.log(gasto)
 
-//     if([gasto.nombre,gasto.categoria,gasto.cantidad].includes('')) {
-//       Alert.alert(
-//         "Error",
-//         "Todos los campos son obligatorios",
-//       )
-//       return 
-//     }
-     
-//      //Vid 143
-//     if(gasto.id) {
-//       //Creamos una variable temporal gastoState => gastoState.id
-//       const gastosActualizados = gastos.map( gastoState => gastoState.id === gasto.id ? gasto : gastoState )
-//       setGastos(gastosActualizados)
-//     } else {
-//         //Vid 132 ,Añadir el nuevo gasto al state
-//         gasto.id = generarId()
-//         gasto.fecha = Date.now()
-//         setGastos([...gastos, gasto])
-//     }
-//     setModal(!modal)
-//   }
-// //Vid 145
-//   const eliminarGasto = id => {
-//     Alert.alert(
-//       '¿Deseas eliminar este gasto?',
-//       'Un gasto eliminado no se puede recuperar', 
-//       [
-//         { text: 'No', style: 'cancel'},
-//         { text: 'Si, Eliminar', onPress: () => {
-          
-//           const gastosActualizados = gastos.filter( gastoState => gastoState.id !== id  )
-
-//           setGastos(gastosActualizados)
-//           setModal(!modal)
-//           setGasto({})
-//         }}
-//       ]
-//     )
-//   }
 
 //   //Vid 164
 
@@ -339,29 +376,7 @@ export default App;
 //               )}
 //           </View>
 
-//           {isValidPresupuesto && (//Vid 133
-//             <>
-//               <Filtro
-//                 //Vid 152 
-//                 filtro={filtro}
-//                 setFiltro={setFiltro}
-//                 //Vid 152
-//                 gastos={gastos}
-//                 setGastosFiltrados={setGastosFiltrados}
-//               />
 
-//               <ListadoGastos 
-//                 gastos={gastos}
-//                 //Vid 141
-//                 setModal={setModal}
-//                 //Vid 141
-//                 setGasto={setGasto}
-//                 filtro={filtro}
-//                 gastosFiltrados={gastosFiltrados}
-//               />
-
-//             </>
-//           )}
 
 //       </ScrollView>
 
@@ -374,5 +389,3 @@ export default App;
 // };
 
 
-
-// export default App;
