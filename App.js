@@ -94,9 +94,10 @@ const App = () => {
             animationType='slide'
             visible={modal} 
         > 
-        {/**Paso 2.26 */}
+        {/**Paso 2.25 */}
         <FormularioGasto
-            // setModal={setModal}
+          //Paso 2.35
+          setModal={setModal}
             // handleGasto={handleGasto}
             // //Vid 142
             // gasto={gasto}
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     position:'absolute',
-    top:120,
+    top:70,
     right:20
   }
 

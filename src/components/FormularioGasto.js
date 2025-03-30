@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react'
 import { Text, SafeAreaView, View, TextInput, StyleSheet, Pressable } from 'react-native'
-//import { Picker } from '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker'
 import globalStyles from '../styles'
 
-const FormularioGasto = () => {
+const FormularioGasto = ({
+    //Paso 2.36
+    setModal,
+    //     //Vid 131
+    //     handleGasto, 
+    //     //Vid 142
+    //     gasto, 
+    //     setGasto, 
+    //     //Vid 145
+    //     eliminarGasto
+
+}) => {
     return (
         //v-127,Paso 2.26
         <SafeAreaView style={styles.contenedor}>
 
             <View style={styles.contenedorBotones}>
                 <Pressable
-                // onLongPress={() => {
-                //     //Vid 129
-                //     setModal(false)
-                //     //Vid 141
-                //     setGasto({})
-                // }}
-                // style={[styles.btn, styles.btnCancelar]}
+                    onLongPress={() => {
+                        //Paso 2.37
+                        setModal(false)
+                        //     //Vid 141
+                        //     setGasto({})
+                    }}
+                    //V-129,paso 2.34
+                    style={[styles.btn, styles.btnCancelar]}
                 >
                     <Text style={styles.btnTexto}>Cancelar</Text>
                 </Pressable>
@@ -36,7 +48,7 @@ const FormularioGasto = () => {
 
             <View View style={styles.formulario}>
                 {/*Paso 2.27 */}
-                <Text>Nombre gasto </Text>
+                <Text style={styles.titulo} >Nombre gasto </Text>
                 {/* <Text style={styles.titulo}>
                     {gasto?.nombre ? 'Editar Gasto' : 'Nuevo Gasto'}
                 </Text> */}
@@ -53,7 +65,7 @@ const FormularioGasto = () => {
                     />
                 </View>
 
-                {/**Paso 2.29 */}
+                {/**Paso 2.30 */}
                 <View style={styles.campo}>
                     <Text style={styles.label}>Cantidad Gasto</Text>
                     <TextInput
@@ -67,15 +79,16 @@ const FormularioGasto = () => {
                     />
                 </View>
 
-                {/* <View style={styles.campo}>
+                <View style={styles.campo}>
                     <Text style={styles.label}>Categoría Gasto</Text>
                     <Picker
-                        selectedValue={categoria}
-                        onValueChange={(valor) => {
-                            setCategoria(valor)
-                        }}
-                        
+                    // selectedValue={categoria}
+                    // onValueChange={(valor) => {
+                    //     setCategoria(valor)
+                    // }}
+
                     >
+                        {/**Paso 2.31,ponemos los datos del picker */}
                         <Picker.Item label="-- Seleccione --" value="" />
                         <Picker.Item label="Ahorro" value="ahorro" />
                         <Picker.Item label="Comida" value="comida" />
@@ -85,25 +98,31 @@ const FormularioGasto = () => {
                         <Picker.Item label="Salud" value="salud" />
                         <Picker.Item label="Suscripciones" value="suscripciones" />
                     </Picker>
-            </View>
+                </View>
 
-            <Pressable 
-                style={styles.submitBtn}
-                //Vid 131 y 143
-                onPress={() => handleGasto({ nombre, cantidad, categoria, id, fecha })}
-            
-            >
-                <Text style={styles.submitBtnTexto}>
-                        {gasto?.nombre ? 'Guardar Cambios Gasto' : 'Agregar Gasto'} 
-                </Text>
-            </Pressable> */}
+                <Pressable
+                    style={styles.submitBtn}
+                // //Vid 131 y 143
+                // onPress={() => handleGasto({ nombre, cantidad, categoria, id, fecha })}
+
+                >
+                    {/**Paso 2.32 */}
+                    <Text style={styles.submitBtnTexto}>
+                        Agregar gasto
+
+                        {/**
+                         *  {gasto?.nombre ? 'Guardar Cambios Gasto' : 'Agregar Gasto'}
+                         */}
+
+                    </Text>
+                </Pressable>
             </View>
         </SafeAreaView >
 
     )
 }
 
-//V-127,paso 2.28
+//V-127,paso 2.29
 const styles = StyleSheet.create({
     contenedor: {
         backgroundColor: '#1E40AF',
@@ -132,25 +151,26 @@ const styles = StyleSheet.create({
         color: '#FFF'
     },
     formulario: {
+        //v-128,paso 2.33
         ...globalStyles.contenedor
     },
     titulo: {
         textAlign: 'center',
         fontSize: 28,
         marginBottom: 30,
-        color: '#E1E8F3'
+        color: '#64748B'
     },
     campo: {
         marginVertical: 10
     },
     label: {
-        color: '#E1E8F3',
+        color: '#64748B',
         textTransform: 'uppercase',
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     input: {
-        backgroundColor: '#3B82F6',
+        backgroundColor: '#F5F5F5',
         padding: 10,
         borderRadius: 10,
         marginTop: 10
@@ -178,14 +198,7 @@ export default FormularioGasto
 
 // //<Text style={styles.colorLetra} >FormularioGasto</Text>
 // const FormularioGasto = ({
-//     setModal,
-//     //Vid 131
-//     handleGasto, 
-//     //Vid 142
-//     gasto, 
-//     setGasto, 
-//     //Vid 145
-//     eliminarGasto
+
 // }) => {
 //     const [ nombre, setNombre] = useState('')
 //     const [ cantidad, setCantidad] = useState('')
