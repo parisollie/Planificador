@@ -26,7 +26,6 @@ const App = () => {
   const [ isValidPresupuesto, setIsValidPresupuesto ] = useState(false)
   //paso 1.21
   const [ presupuesto, setPresupuesto ] = useState(0)
-
   //V-124,paso 2.14
   const [ gastos, setGastos ] = useState([
 
@@ -37,6 +36,13 @@ const App = () => {
 
   //V-126,paso 2.21
   const [ modal, setModal] = useState(false)
+  //Paso 4.10
+  const [ gasto, setGasto ] = useState({})
+  // //Vid 152
+  // const [ filtro, setFiltro ] = useState('')
+  // const [ gastosFiltrados, setGastosFiltrados ] = useState([])
+
+
 
   //V-119,paso 1.18
   const handleNuevoPresupuesto = (presupuesto) => {
@@ -58,9 +64,9 @@ const App = () => {
   }
   //V-131,Paso 3.4
   const handleGasto = gasto => {
-    console.log(gasto)
-    //Paso 3.7
-    if(Object.values(gasto).includes('')){
+    //console.log(gasto)
+    //Paso 3.7 y paso 4.23
+    if([gasto.nombre,gasto.categoria,gasto.cantidad].includes('')) {
         Alert.alert(
         "Error",
         "Todos los campos son obligatorios",
@@ -68,50 +74,43 @@ const App = () => {
       return 
     }
 
-    //paso 3.9,Añadir el nuevo gasto al state
-    gasto.id = generarId()
-    //gasto.fecha = Date.now()
-    setGastos([...gastos, gasto])
-    //Paos 3.10
-    setModal(!modal)
-    
 
-    // if([gasto.nombre,gasto.categoria,gasto.cantidad].includes('')) {
-   
-    //   
-    // }
-     
-    //  //Vid 143
-    // if(gasto.id) {
-    //   //Creamos una variable temporal gastoState => gastoState.id
-    //   const gastosActualizados = gastos.map( gastoState => gastoState.id === gasto.id ? gasto : gastoState )
-    //   setGastos(gastosActualizados)
-    // } else {
-  
-    // }
+    //V-143,paso 4.24
+    if(gasto.id) {
+      //Creamos una variable temporal gastoState => gastoState.id
+      const gastosActualizados = gastos.map( gastoState => gastoState.id === gasto.id ? gasto : gastoState )
+      setGastos(gastosActualizados)
+    } else {
+      //Paso 4.25
+      //paso 3.9,Añadir el nuevo gasto al state
+      gasto.id = generarId()
+      //V-139,paso 4.0, agregamos fecha
+      gasto.fecha = Date.now()
+      setGastos([...gastos, gasto])
+    }  
+    //Paso 3.10
+    setModal(!modal)
    
   }
 
-
-  
-  // //Vid 145
-  // const eliminarGasto = id => {
-  //   Alert.alert(
-  //     '¿Deseas eliminar este gasto?',
-  //     'Un gasto eliminado no se puede recuperar', 
-  //     [
-  //       { text: 'No', style: 'cancel'},
-  //       { text: 'Si, Eliminar', onPress: () => {
+  //V-145,paso 4.25
+  const eliminarGasto = id => {
+    Alert.alert(
+      '¿Deseas eliminar este gasto?',
+      'Un gasto eliminado no se puede recuperar', 
+      [
+        { text: 'No', style: 'cancel'},
+        { text: 'Si, Eliminar', onPress: () => {
           
-  //         const gastosActualizados = gastos.filter( gastoState => gastoState.id !== id  )
+          const gastosActualizados = gastos.filter( gastoState => gastoState.id !== id  )
 
-  //         setGastos(gastosActualizados)
-  //         setModal(!modal)
-  //         setGasto({})
-  //       }}
-  //     ]
-  //   )
-  // }
+          setGastos(gastosActualizados)
+          setModal(!modal)
+          setGasto({})
+        }}
+      ]
+    )
+  }
 
 
   return (
@@ -166,11 +165,10 @@ const App = () => {
             //   />
               //Paso 3.12
               <ListadoGastos 
-            
-                //Vid 141
-                //setModal={setModal}
-                //Vid 141
-                //setGasto={setGasto}
+                //V-141,paso 4.4
+                setModal={setModal}
+                //Paso 4.11
+                setGasto={setGasto}
                 //filtro={filtro}
                 //Paso
                 //gastosFiltrados={gastosFiltrados}
@@ -197,12 +195,12 @@ const App = () => {
           setModal={setModal}
             //Paso 3.5
             handleGasto={handleGasto}
-            // //Vid 142
-            // gasto={gasto}
-            // //Vid 141
-            // setGasto={setGasto}
-            // //Vid 145
-            // eliminarGasto={eliminarGasto}
+            //V-142,paso 4.15
+            gasto={gasto}
+            //Paso 4.13
+            setGasto={setGasto}
+            //Paso 4.27
+            eliminarGasto={eliminarGasto}
         
         />    
         </Modal>
@@ -211,7 +209,7 @@ const App = () => {
       {/**V-125,paso 2.19 */}
       {isValidPresupuesto && (
         <Pressable
-          
+          //V-146,Paso 4.27
           style={styles.pressable}
           //Paso 2.22
           onPress={() => setModal(!modal)}
@@ -237,16 +235,23 @@ const styles = StyleSheet.create({
     //Paso 1.11
     header: {
       backgroundColor: '#3B82F6',
-      //minHeight: 400
-  },
-  //Paso 2.20
-  imagen: {
-    width: 60,
-    height: 60,
-    position:'absolute',
-    bottom:40,
-    right:30
-  }
+     // minHeight: 400
+    },
+    //paso 4.26
+    pressable: {
+      //backgroundColor:'red',
+      width: 60,
+      height: 60, 
+      position: 'absolute',
+      bottom: 40,
+      right: 30
+    },
+    //Paso 2.20
+    imagen: {
+      width: 60,
+      height: 60,
+    }  
+  
 
  
 });

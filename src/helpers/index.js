@@ -13,7 +13,7 @@ export const generarId = () => {
     return random + fecha
 }
 
-//V-139
+//V-139,paso 4.2 para fechas
 export const formatearFecha = fecha => {
     const fechaNueva = new Date(fecha)
     const opciones = {

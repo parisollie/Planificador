@@ -29,8 +29,8 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
         //Paso 2.18,lo colocamos
         setGastado(totalGastado)
         setDisponible(totalDisponible)
-        //Vid 140 [gastos]
-    }, [])
+        //V-140,Paso 4.3 le pasamos  [gastos]
+    }, [gastos])
 
 
     return (

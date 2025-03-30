@@ -6,8 +6,9 @@ import Gasto from './Gasto'
 const ListadoGastos = (
     {
         gastos,
-        //     setModal,
-        //     setGasto,
+        //Paso 4.5
+        setModal,
+        setGasto,
         //     //Vid 153 
         //     filtro,
         //     gastosFiltrados
@@ -25,9 +26,9 @@ const ListadoGastos = (
                     <Gasto
                         key={gasto.id}
                         gasto={gasto}
-                    //setModal={setModal}
-                    //Vid 141
-                    //setGasto={setGasto}
+                        //Paso 4.7
+                        setModal={setModal}
+                        setGasto={setGasto}
                     />
 
 

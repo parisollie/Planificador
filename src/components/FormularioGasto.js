@@ -7,32 +7,35 @@ const FormularioGasto = ({
     //Paso 2.36
     setModal,
     handleGasto,
-    //     //Vid 142
-    //     gasto, 
-    //     setGasto, 
-    //     //Vid 145
-    //     eliminarGasto
+    //V-142,paso 4.16
+    gasto,
+    setGasto,
+    //Paso 4.28
+    eliminarGasto
 
 }) => {
     //V-130,Paso 3.0
     const [nombre, setNombre] = useState('')
     const [cantidad, setCantidad] = useState('')
     const [categoria, setCategoria] = useState('')
-    //     const [ id, setId ] = useState('')
-    //     const [ fecha, setFecha ] = useState('')
+    //Paso 4.19
+    const [id, setId] = useState('')
+    //V-143, paso 4.20
+    const [fecha, setFecha] = useState('')
 
-    //     //Vid 142
-    //     useEffect(() => {
-    //         //? , existe la propiedad
-    //         if(gasto?.nombre) {
-    //             console.log('Si hay algo')
-    //             setNombre(gasto.nombre)
-    //             setCantidad(gasto.cantidad)
-    //             setCategoria(gasto.categoria)
-    //             setId(gasto.id)
-    //             setFecha(gasto.fecha)
-    //         }
-    //     }, [gasto])
+    //Paso 4.18
+    useEffect(() => {
+        //? , existe la propiedad
+        if (gasto?.nombre) {
+            console.log('Si hay algo')
+            setNombre(gasto.nombre)
+            setCantidad(gasto.cantidad)
+            setCategoria(gasto.categoria)
+            setId(gasto.id)
+            //Paso 4.21
+            setFecha(gasto.fecha)
+        }
+    }, [gasto])
 
 
     return (
@@ -42,10 +45,11 @@ const FormularioGasto = ({
             <View style={styles.contenedorBotones}>
                 <Pressable
                     onLongPress={() => {
-                        //Paso 2.37
+                        //Paso 2.37?
+                        //Paso 4.14
                         setModal(false)
-                        //     //V-141
-                        //     setGasto({})
+                        //V-141
+                        setGasto({})
                     }}
                     //V-129,paso 2.34
                     style={[styles.btn, styles.btnCancelar]}
@@ -53,25 +57,28 @@ const FormularioGasto = ({
                     <Text style={styles.btnTexto}>Cancelar</Text>
                 </Pressable>
 
-                {/* {!!id && (//Vid 150 !! esta vacio es un registro nuevo
 
+                {/**V-144,Paso 4.25 */}
+                {!!id && (//Vid 150 !! esta vacio es un registro nuevo
                     <Pressable
                         style={[styles.btn, styles.btnEliminar]}
+                        //Paso 4.29
                         onLongPress={() => eliminarGasto(id)}
                     >
                         <Text style={styles.btnTexto}>Eliminar</Text>
                     </Pressable>
-                )
-                } */}
+                )}
+
 
             </View>
 
             <View View style={styles.formulario}>
                 {/*Paso 2.27 */}
-                <Text style={styles.titulo} >Nombre gasto </Text>
-                {/* <Text style={styles.titulo}>
+                {/* <Text style={styles.titulo} >Nombre gasto </Text> */}
+                {/**Paso 4.17 */}
+                <Text style={styles.titulo}>
                     {gasto?.nombre ? 'Editar Gasto' : 'Nuevo Gasto'}
-                </Text> */}
+                </Text>
 
                 <View style={styles.campo} >
                     {/*Paso 2.28 */}
@@ -123,19 +130,12 @@ const FormularioGasto = ({
 
                 <Pressable
                     style={styles.submitBtn}
-                    //Paso 3.6 y 143
-                    onPress={() => handleGasto({ nombre, cantidad, categoria })}
-                // onPress={() => handleGasto({ nombre, cantidad, categoria, id, fecha })}
-
+                    //Paso 3.6 ,paso 4.22
+                    onPress={() => handleGasto({ nombre, cantidad, categoria, id, fecha })}
                 >
-                    {/**Paso 2.32 */}
+                    {/**Paso 2.32  y paso 4.18*/}
                     <Text style={styles.submitBtnTexto}>
-                        Agregar gasto
-
-                        {/**
-                         *  {gasto?.nombre ? 'Guardar Cambios Gasto' : 'Agregar Gasto'}
-                         */}
-
+                        {gasto?.nombre ? 'Guardar Cambios Gasto' : 'Agregar Gasto'}
                     </Text>
                 </Pressable>
             </View>

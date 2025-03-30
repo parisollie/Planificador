@@ -17,44 +17,57 @@ const diccionarioIconos = {
 //paso 3.16
 const Gasto = (
     {
-        gasto
+        gasto,
+        //Paso 4.6
+        setModal,
+        setGasto
 
     }) => {
     //V-135,paso 3.18
-    const { nombre, categoria, cantidad, id } = gasto
+    const { nombre, categoria, cantidad, fecha, id } = gasto
+
+    //paso 4.9 
+    const handleAcciones = () => {
+        setModal(true)
+        //Paso 4.12
+        setGasto(gasto)
+    }
+
+
     return (
-        // <Pressable
-        //     onLongPress={handleAcciones}
-        // >
+        //Paso 4.8,ponemos el presable
+        <Pressable
+            onLongPress={handleAcciones}
+        >
 
-        <View style={styles.contenedor}>
+            <View style={styles.contenedor}>
 
 
-            <View style={styles.contenido}>
-                <View style={styles.contenedorImagen}>
-                    <Image
-                        //Paso 3.23
-                        style={styles.imagen}
-                        source={diccionarioIconos[categoria]}
+                <View style={styles.contenido}>
+                    <View style={styles.contenedorImagen}>
+                        <Image
+                            //Paso 3.23
+                            style={styles.imagen}
+                            source={diccionarioIconos[categoria]}
 
-                    />
-                    <View style={styles.contenedorTexto}>
-                        <Text style={styles.categoria}>{categoria}</Text>
-                        {/**Paso 3.21 */}
-                        <Text style={styles.nombre}>{nombre}</Text>
-                        {/*
+                        />
+                        <View style={styles.contenedorTexto}>
+                            <Text style={styles.categoria}>{categoria}</Text>
+                            {/**Paso 3.21 */}
+                            <Text style={styles.nombre}>{nombre}</Text>
+                            {/*
                          <Text style={styles.fecha}>{formatearFecha(fecha)}</Text>
                          */}
 
 
+                        </View>
                     </View>
-                </View>
-                {/**V-136,Paso 3.22 */}
-                <Text style={styles.cantidad}>{formatearCantidad(cantidad)}</Text>
+                    {/**V-136,Paso 3.22 */}
+                    <Text style={styles.cantidad}>{formatearCantidad(cantidad)}</Text>
 
+                </View>
             </View>
-        </View>
-        //</Pressable >
+        </Pressable >
     )
 }
 
@@ -101,7 +114,7 @@ const styles = StyleSheet.create({
     },
     fecha: {
         fontWeight: '700',
-        color: '#64748B'
+        color: '#DB2777'
     },
     colorLetra: {
         color: '#204220'
@@ -114,20 +127,6 @@ export default Gasto
 
 
 
-// const Gasto = ({ gasto, setModal, setGasto }) => {
 
 
-//     //Vid 141 
-//     const handleAcciones = () => {
-//         setModal(true)
-//         setGasto(gasto)
-//     }
-//     //style={styles.colorLetra}
 
-//     return (
-
-//     )
-// }
-
-
-// export default Gasto
