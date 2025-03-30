@@ -22,12 +22,12 @@ const App = () => {
   //paso 1.21
   const [ presupuesto, setPresupuesto ] = useState(0)
 
-  //V-124
+  //V-124,paso 2.14
   const [ gastos, setGastos ] = useState([
 
     /*{id:1,cantidad:30},
-    {id:2,cantidad:730},
-    {id:4,cantidad:930}*/
+    {id:2,cantidad:40},
+    {id:3,cantidad:50}*/
   ])
 
 
@@ -63,8 +63,8 @@ const App = () => {
           {/**Paso 1.29 */}
           {isValidPresupuesto ? (
             <ControlPresupuesto
-              
-              //gastos={gastos}
+              //Paso 2.15
+              gastos={gastos}
               //Paso2.8
               presupuesto={presupuesto} 
 //                 //Vid 164

@@ -1,34 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
 import globalStyles from '../styles'
 import { formatearCantidad } from '../helpers'
 
 //V-120,Paso 1.28
-const ControlPresupuesto = ({ presupuesto }) => {
+const ControlPresupuesto = ({ presupuesto,gastos }) => {
 
+    //V-124,Paso 2.13,inicia en 0
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
     //Vid 149
-    const [porcentaje, setPorcentaje] = useState(0)
+   // const [porcentaje, setPorcentaje] = useState(0)
 
-    //Vid 124
-    // useEffect(() => {
-    //     const totalGastado = gastos.reduce( (total, gasto) => Number(gasto.cantidad) + total, 0 )
-    //     //Vid 124,Calcular lo disponible 
-    //     const totalDisponible = presupuesto - totalGastado
-    //     //Vid 149
-    //     const nuevoPorcentaje = (
-    //         ((presupuesto - totalDisponible) / presupuesto) * 100
-    //     )
-    //     //Vid 149
-    //     setTimeout(() => {
-    //         setPorcentaje(nuevoPorcentaje)
-    //     }, 1000);
-    //     //Vid 124, lo colocamos
-    //     setGastado(totalGastado)
-    //     setDisponible(totalDisponible)
-    //     //Vid 140 [gastos]
-    // }, [gastos])
+    //V-124,paso 2.16
+    useEffect(() => {
+        //Paso 2.17
+        const totalGastado = gastos.reduce( (total, gasto) => Number(gasto.cantidad) + total, 0 )
+        //Calcular lo disponible 
+        const totalDisponible = presupuesto - totalGastado
+        //Vid 149
+        // const nuevoPorcentaje = (
+        //     ((presupuesto - totalDisponible) / presupuesto) * 100
+        // )
+        //Vid 149
+        // setTimeout(() => {
+        //     setPorcentaje(nuevoPorcentaje)
+        // }, 1000);
+        //Paso 2.18,lo colocamos
+        setGastado(totalGastado)
+        setDisponible(totalDisponible)
+        //Vid 140 [gastos]
+    }, [])
+
+    
     return (
         //v-121,Paso 2.0
         <View style={styles.contenedor}>
