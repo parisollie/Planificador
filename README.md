@@ -2,7 +2,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # Getting Started a new App in React Native
 
-# JavaScript Introduccion 2
+# Planificador P-8
 
 ## Development
 **Hay un problema con el circular progress Bar un bug, lo demas funciona bien.
