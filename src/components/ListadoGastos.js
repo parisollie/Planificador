@@ -9,9 +9,9 @@ const ListadoGastos = (
         //Paso 4.5
         setModal,
         setGasto,
-        //     //Vid 153 
-        //     filtro,
-        //     gastosFiltrados
+        //V-153 
+        filtro,
+        gastosFiltrados
     }
 ) => {
     return (
@@ -19,37 +19,42 @@ const ListadoGastos = (
             <Text style={styles.titulo}>Gastos</Text>
 
             {/**V-134,Paso 3.15 */}
-            {gastos.length === 0 ?
+            {/* {gastos.length === 0 ?
                 <Text style={styles.noGastos}>No Hay Gastos</Text> :
                 gastos.map(gasto => (
                     //Paso 3.17
                     <Gasto
                         key={gasto.id}
                         gasto={gasto}
-                        //Paso 4.7
+
                         setModal={setModal}
                         setGasto={setGasto}
                     />
+                ))} */}
 
-
-                ))}
-
-
-            {/* {filtro ? gastosFiltrados.map(gasto => (
+            {/*Paso 5.15 */}
+            {filtro ? gastosFiltrados.map(gasto => (
+                //Paso 3.17
                 <Gasto
                     key={gasto.id}
                     gasto={gasto}
+                    //Paso 4.7
                     setModal={setModal}
                     setGasto={setGasto}
                 />
             )) : gastos.map(gasto => (
-               
+                <Gasto
+                    key={gasto.id}
+                    gasto={gasto}
+                    //Paso 4.7
+                    setModal={setModal}
+                    setGasto={setGasto}
+                />
             ))}
-
-
+            {/*paso 5.16 */}
             {(gastos.length === 0 || (gastosFiltrados.length === 0 && !!filtro)) && (
                 <Text style={styles.noGastos}>No Hay Gastos</Text>
-            )} */}
+            )}
 
         </View>
     )
@@ -58,7 +63,7 @@ const ListadoGastos = (
 //Paso 3.13
 const styles = StyleSheet.create({
     contenedor: {
-        marginTop: 70,
+        marginTop: 30,
         marginBottom: 100
     },
     titulo: {

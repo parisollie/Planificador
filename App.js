@@ -7,7 +7,7 @@ import FormularioGasto from './src/components/FormularioGasto';
 import { generarId } from './src/helpers'
 import ListadoGastos from './src/components/ListadoGastos';
 // import AsyncStorage from '@react-native-async-storage/async-storage'
-// import Filtro from './src/components/Filtro';
+import Filtro from './src/components/Filtro';
 import {
   ScrollView,
   StyleSheet,
@@ -38,9 +38,9 @@ const App = () => {
   const [ modal, setModal] = useState(false)
   //Paso 4.10
   const [ gasto, setGasto ] = useState({})
-  // //Vid 152
-  // const [ filtro, setFiltro ] = useState('')
-  // const [ gastosFiltrados, setGastosFiltrados ] = useState([])
+  //V-152,paso 5.10
+  const [ filtro, setFiltro ] = useState('')
+  const [ gastosFiltrados, setGastosFiltrados ] = useState([])
 
 
 
@@ -130,7 +130,7 @@ const App = () => {
               <ControlPresupuesto
               //Paso 2.15
               gastos={gastos}
-              //Paso2.8
+              //Paso 2.8
               presupuesto={presupuesto} 
 //                 //Vid 164
 //                 resetearApp={resetearApp}
@@ -152,32 +152,30 @@ const App = () => {
       {/**V-133,Paso 3.10 */}
 
       {isValidPresupuesto && (
-      
-       
-            // <>
-            //   <Filtro
-            //     //Vid 152 
-            //     filtro={filtro}
-            //     setFiltro={setFiltro}
-            //     //Vid 152
-            //     gastos={gastos}
-            //     setGastosFiltrados={setGastosFiltrados}
-            //   />
-              //Paso 3.12
+            <>
+              {/**Paso 5.7 */}
+              <Filtro
+                //Paso 5.11 
+                filtro={filtro}
+                setFiltro={setFiltro}
+                gastos={gastos}
+                setGastosFiltrados={setGastosFiltrados}
+              />
+              {/* //Paso 3.12 */}
               <ListadoGastos 
                 //V-141,paso 4.4
                 setModal={setModal}
                 //Paso 4.11
                 setGasto={setGasto}
-                //filtro={filtro}
-                //Paso
-                //gastosFiltrados={gastosFiltrados}
+                //Paso 5.14
+                filtro={filtro}
+                gastosFiltrados={gastosFiltrados}
                 //paso 3.14
                 gastos = {gastos}
 
               />
 
-            // </>
+             </>
           )}
 
       </ScrollView>

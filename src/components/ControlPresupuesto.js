@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet, Pressable, Image } from 'react-native'
 import globalStyles from '../styles'
 import { formatearCantidad } from '../helpers'
+import CircularProgress from 'react-native-circular-progress-indicator'
 
 //V-120,Paso 1.28
 const ControlPresupuesto = ({ presupuesto, gastos }) => {
@@ -9,8 +10,8 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
     //V-124,Paso 2.13,inicia en 0
     const [disponible, setDisponible] = useState(0)
     const [gastado, setGastado] = useState(0)
-    //Vid 149
-    // const [porcentaje, setPorcentaje] = useState(0)
+    //V-149,paso 5.2
+    const [porcentaje, setPorcentaje] = useState(0)
 
     //V-124,paso 2.16
     useEffect(() => {
@@ -18,14 +19,16 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
         const totalGastado = gastos.reduce((total, gasto) => Number(gasto.cantidad) + total, 0)
         //Calcular lo disponible 
         const totalDisponible = presupuesto - totalGastado
-        //Vid 149
-        // const nuevoPorcentaje = (
-        //     ((presupuesto - totalDisponible) / presupuesto) * 100
-        // )
-        //Vid 149
-        // setTimeout(() => {
-        //     setPorcentaje(nuevoPorcentaje)
-        // }, 1000);
+        //Paso 5.4
+        const nuevoPorcentaje = (
+            ((presupuesto - totalDisponible) / presupuesto) * 100
+        )
+
+        setTimeout(() => {
+            //Paso 5.5
+            setPorcentaje(nuevoPorcentaje)
+        }, 1000);
+
         //Paso 2.18,lo colocamos
         setGastado(totalGastado)
         setDisponible(totalDisponible)
@@ -36,10 +39,12 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
     return (
         //v-121,Paso 2.0
         <View style={styles.contenedor}>
+            {/** Paso 5.1 */}
             {/* <View style={styles.centrarGrafica}>
                 <CircularProgress
-                    value={ porcentaje }
-                    //Vid 148
+                    //Paso 5.3
+                    value={porcentaje}
+                    //V-148
                     duration={1000}
                     radius={150}
                     valueSuffix={'%'}
@@ -48,13 +53,13 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
                     inActiveStrokeWidth={20}
                     activeStrokeColor='#3b82f6'
                     activeStrokeWidth={20}
-                    titleStyle={{ fontWeight: 'bold', fontSize: 20}}
+                    titleStyle={{ fontWeight: 'bold', fontSize: 20 }}
                     titleColor='#64748B'
                 />
             </View> */}
 
             <View style={styles.centrarGrafica}>
-                {/**Paso 2.1,ponemos la imagen */}
+                {/* //Paso 2.1,ponemos la imagen */}
                 <Image
                     //paso 2.5
                     style={styles.imagen}
@@ -136,7 +141,7 @@ export default ControlPresupuesto
 
 
 
-// import CircularProgress from 'react-native-circular-progress-indicator'
+
 
 
 // const ControlPresupuesto = ({presupuesto,gastos,resetearApp}) => {

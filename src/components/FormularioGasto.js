@@ -59,7 +59,7 @@ const FormularioGasto = ({
 
 
                 {/**V-144,Paso 4.25 */}
-                {!!id && (//Vid 150 !! esta vacio es un registro nuevo
+                {!!id && (//V-150 !!,paso 5.6 esta vacio es un registro nuevo
                     <Pressable
                         style={[styles.btn, styles.btnEliminar]}
                         //Paso 4.29
