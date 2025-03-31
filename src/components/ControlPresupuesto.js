@@ -5,7 +5,7 @@ import { formatearCantidad } from '../helpers'
 import CircularProgress from 'react-native-circular-progress-indicator'
 
 //V-120,Paso 1.28
-const ControlPresupuesto = ({ presupuesto, gastos }) => {
+const ControlPresupuesto = ({ presupuesto, gastos, resetearApp }) => {
 
     //V-124,Paso 2.13,inicia en 0
     const [disponible, setDisponible] = useState(0)
@@ -23,9 +23,6 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
         const nuevoPorcentaje = (
             ((presupuesto - totalDisponible) / presupuesto) * 100
         )
-
-
-
         setTimeout(() => {
             //Paso 5.5
             setPorcentaje(nuevoPorcentaje)
@@ -60,8 +57,6 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
                 />
             </View> */}
 
-
-
             <View style={styles.centrarGrafica}>
                 {/* //Paso 2.1,ponemos la imagen */}
                 <Image
@@ -71,17 +66,15 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
 
             </View>
 
-
-
-
             {/*Paso 2.8 */}
             <View style={styles.contenedorTexto}>
-                {/* <Pressable
-                    //onLongPress={resetearApp}
+                {/**V-164,Paso 6.3 */}
+                <Pressable
+                    onLongPress={resetearApp}
                     style={styles.boton}
                 >
                     <Text style={styles.textoBoton}>Reiniciar App</Text>
-                </Pressable> */}
+                </Pressable>
                 {/**Paso 2.9 */}
                 <Text style={styles.valor}>
                     <Text style={styles.label}>Presupuesto: {''} </Text>

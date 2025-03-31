@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image, Pressable } from 'react-native'
 import globalStyles from '../styles'
-import { formatearCantidad, formatearFecha } from '../helpers'
+import { formatearCantidad } from '../helpers'
 
 //Paso 3.22
 const diccionarioIconos = {
@@ -58,8 +58,6 @@ const Gasto = (
                             {/*
                          <Text style={styles.fecha}>{formatearFecha(fecha)}</Text>
                          */}
-
-
                         </View>
                     </View>
                     {/**V-136,Paso 3.22 */}

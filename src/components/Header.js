@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, SafeAreaView } from 'react-native'
+import { Text, StyleSheet, SafeAreaView } from 'react-native'
 
 //V-116,paso 1.0
 const Header = () => {

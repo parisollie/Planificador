@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native'
 import globalStyles from '../styles'
 
 
 //V-117,Paso 1.3, creamos el componente
 const NuevoPresupuesto = (
-    { 
+    {
         //Paso 2.7
-        presupuesto, 
-        setPresupuesto, 
+        presupuesto,
+        setPresupuesto,
         //Paso 1.23
-        handleNuevoPresupuesto 
+        handleNuevoPresupuesto
     }
 ) => {
-  
-    
+
+
     return (
         //Paso 1.9, le pones los estilos del contenedor
         <View style={styles.contenedor}>
@@ -27,9 +27,9 @@ const NuevoPresupuesto = (
                 placeholder='Agrega tu presupuesto: Ej. 300'
                 style={styles.input}
                 //Paso 1.25
-                value={ presupuesto.toString() }
+                value={presupuesto.toString()}
                 onChangeText={setPresupuesto}
-                
+
             />
 
             {/*Paso 1.5 */}
@@ -50,7 +50,7 @@ const NuevoPresupuesto = (
 //paso 1.6
 const styles = StyleSheet.create({
     contenedor: {
-        ...globalStyles.contenedor, 
+        ...globalStyles.contenedor,
     },
     //Paso 1.17
     label: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: 'center',
         marginTop: 30,
-       
+
     },
     boton: {
         marginTop: 30,
@@ -81,41 +81,4 @@ const styles = StyleSheet.create({
 })
 
 export default NuevoPresupuesto
-
-
-// //Vid 117 
-// const NuevoPresupuesto = ({ 
-//     //Vid 122
-//     presupuesto, 
-//     setPresupuesto, 
-//     handleNuevoPresupuesto 
-// }) => {
-
-//     return (
-//         <View style={styles.contenedor}>
-//             <Text style={styles.label}>Definir Presupuesto</Text>
-
-//             <TextInput
-//                 //Vid 118 
-//                 keyboardType='numeric'
-//                 placeholder='Agrega tu presupuesto: Ej. 300'
-//                 style={styles.input}
-//                 //Vid 119
-//                 value={ presupuesto.toString() }
-//                 onChangeText={setPresupuesto}
-                
-//             />
-
-//             <Pressable
-//             //Vid 117 
-//                 style={styles.boton}
-//                 //Vid 119 
-//                 onPress={() => handleNuevoPresupuesto(presupuesto)}
-//             >
-//                 <Text style={styles.botonTexto}>Agregar Presupuesto</Text>
-//             </Pressable>
-            
-//         </View>
-//     )
-// }
 
